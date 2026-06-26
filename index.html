@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jackr.dev - Under Construction</title>
+    <title>jackr.dev</title>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -13,127 +13,261 @@
             --accent-border: #6366f1;
         }
 
-        body {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Floating Navigation Toolbar */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            width: 95%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 50px;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            max-width: 95vw;
+            overflow-x: auto;
+        }
+
+        .nav-brand {
+            padding: 0rem 0rem 0rem 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #6366f1, #a5b4fc);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            margin-left: auto;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Main Content */
+        .hero {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .container {
+            min-height: 100vh;
+            padding: 2rem;
             text-align: center;
-            padding: 2.5rem;
-            border-radius: 24px;
-            background: linear-gradient(145deg, #111827, #1f2937);
-            box-shadow: 0 0 40px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            max-width: 440px;
-            width: 90%;
-            position: relative;
         }
 
-        .icon-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
+        .hero-content {
+            max-width: 600px;
+            padding-bottom: 2rem;
         }
 
-        .emoji {
-            font-size: 3.5rem;
-            position: relative;
-            z-index: 2;
+        .hero-emoji {
+            font-size: 5rem;
             display: inline-block;
             animation: float 4s ease-in-out infinite;
         }
 
-        .pulse-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background-color: var(--accent-border);
-            border-radius: 50%;
-            filter: blur(20px);
-            opacity: 0.3;
-            z-index: 1;
-            animation: pulse 3s infinite alternate;
-        }
-
         h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin: 0 0 0.75rem 0;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.025em;
-            background: linear-gradient(to right, #ffffff, #9ca3af);
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.3;
         }
 
-        p {
+        .subtitle {
+            font-size: 1.25rem;
             color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 1rem;
-            line-height: 1.5;
-            margin: 0 0 2rem 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            color: #a5b4fc;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4);
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #34d399;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #34d399;
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-3px);
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-15px); }
         }
 
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.2; }
-            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.6rem 1.5rem;
+                gap: 1rem;
+                max-width: 85vw;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                gap: 0.5rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="icon-wrapper">
-            <div class="pulse-glow"></div>
-            <div class="emoji">🧑‍💻</div>
+    <!-- Floating Navigation Toolbar -->
+    <nav>
+        <a href="#" class="nav-brand">jackr.dev</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="cta-button">Get in Touch</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-emoji">👨‍💻</div>
+            <h1>Welcome to jackr.dev</h1>
+            <p class="subtitle">Building beautiful, modern digital experiences. Let's create something amazing together.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">View My Work</button>
+                <button class="btn-secondary">Learn More</button>
+            </div>
         </div>
-        <h1>Under Construction</h1>
-        <p>Hang tight! My website is currently under construction. Check back soon to see what's cooking.</p>
-        
-        <div class="status-badge">
-            <div class="status-dot"></div>
-            DNS Connected
-        </div>
-    </div>
+    </section>
 
 </body>
 </html>

@@ -26,7 +26,6 @@
             line-height: 1.6;
         }
 
-        /* Floating Navigation Toolbar */
         nav {
             position: fixed;
             top: 20px;
@@ -107,8 +106,19 @@
             position: relative;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a[aria-current="page"] {
             color: var(--text-main);
+        }
+
+        .nav-links a[aria-current="page"]::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -4px;
+            left: 0;
+            height: 2px;
+            background: var(--accent-bright);
         }
 
         .nav-links a::after {
@@ -147,7 +157,6 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
-        /* Under Construction Content */
         .hero {
             margin: 0;
             padding: 0;
@@ -281,6 +290,13 @@
             }
         }
 
+        .site-footer {
+            padding: 1.5rem 1rem 2rem;
+            color: #6b7280;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 0.6rem 1rem;
@@ -334,21 +350,18 @@
     </style>
 </head>
 <body>
-    <!-- Floating Navigation Toolbar -->
     <nav>
         <a href="index.html" class="nav-brand">jackr.dev</a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
             <span class="hamburger"></span>
         </button>
         <ul class="nav-links">
-            <li><a href="construction.html">About</a></li>
-            <li><a href="construction.html">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="construction.html" aria-current="page">Projects</a></li>
         </ul>
         <a href="contact.html" class="cta-button">Get in Touch</a>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="icon-wrapper">
@@ -364,6 +377,8 @@
             </div>
         </div>
     </section>
+
+    <footer class="site-footer">© 2026 Jack Rogers</footer>
 
     <script>
         (function() {

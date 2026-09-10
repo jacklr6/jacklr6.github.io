@@ -26,7 +26,6 @@
             line-height: 1.6;
         }
 
-        /* Floating Navigation Toolbar */
         nav {
             position: fixed;
             top: 20px;
@@ -147,7 +146,6 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
-        /* Main Content */
         .hero {
             display: flex;
             justify-content: center;
@@ -166,13 +164,29 @@
             font-weight: 800;
             margin-bottom: 0.5rem;
             letter-spacing: -0.025em;
-            background: linear-gradient(to right, #ffffff, #a5b4fc);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             line-height: 1.3;
             animation: fadeInUp 0.8s ease-out 0.4s forwards;
             opacity: 0;
+            white-space: nowrap;
+        }
+
+        h1 .magnify-letter {
+            display: inline-block;
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
+            background-size: var(--title-width, 1000%) 100%;
+            background-position: var(--letter-bg-pos, 0%) 0;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: scale(var(--letter-scale, 1));
+            transform-origin: center bottom;
+            transition: transform 0.12s ease-out;
+            will-change: transform;
+        }
+
+        h1 .magnify-space {
+            display: inline-block;
+            white-space: pre;
         }
 
         .subtitle {
@@ -248,7 +262,6 @@
             }
         }
 
-        /* Cursor Glow Effect */
         .cursor-glow {
             position: fixed;
             width: 300px;
@@ -267,6 +280,13 @@
 
         .cursor-glow.hidden {
             opacity: 0;
+        }
+
+        .site-footer {
+            padding: 1.5rem 1rem 2rem;
+            color: #6b7280;
+            font-size: 0.8rem;
+            text-align: center;
         }
 
         @media (max-width: 768px) {
@@ -335,38 +355,69 @@
     </style>
 </head>
 <body>
-
-    <!-- Cursor Glow Element -->
     <div class="cursor-glow hidden"></div>
 
-    <!-- Floating Navigation Toolbar -->
     <nav>
         <a href="index.html" class="nav-brand">jackr.dev</a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
             <span class="hamburger"></span>
         </button>
         <ul class="nav-links">
-            <li><a href="construction.html">About</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="construction.html">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
         </ul>
         <a href="contact.html" class="cta-button">Get in Touch</a>
     </nav>
-
-    <!-- Hero Section -->
+    
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to jackr.dev</h1>
+            <h1 id="hero-title">Welcome to jackr.dev</h1>
             <p class="subtitle"><b><i>Computer Science & Mathematics</i></b> Student-Athlete at Gettysburg College</p>
             <div class="hero-buttons">
                 <button class="btn-primary">View My Work</button>
-                <button class="btn-secondary">Learn More</button>
+                <a href="about.html" class="btn-secondary">Learn More</a>
             </div>
         </div>
     </section>
 
+    <footer class="site-footer">© 2026 Jack Rogers</footer>
+
     <script>
-        // Cursor Glow Effect
+        const heroTitle = document.querySelector('#hero-title');
+        const titleText = heroTitle.textContent;
+        const totalChars = titleText.length;
+
+        heroTitle.replaceChildren(...[...titleText].map((character, index) => {
+            const letter = document.createElement('span');
+            letter.className = character === ' ' ? 'magnify-space' : 'magnify-letter';
+            letter.textContent = character;
+
+            const percent = totalChars > 1 ? (index / (totalChars - 1)) * 100 : 0;
+            letter.style.setProperty('--letter-bg-pos', `${percent}%`);
+            letter.style.setProperty('--title-width', `${totalChars * 100}%`);
+
+            return letter;
+        }));
+
+        const titleLetters = [...heroTitle.querySelectorAll('.magnify-letter')];
+        heroTitle.addEventListener('pointermove', (event) => {
+            const radius = 150;
+
+            titleLetters.forEach((letter) => {
+                const bounds = letter.getBoundingClientRect();
+                const distance = Math.hypot(
+                    event.clientX - (bounds.left + bounds.width / 2),
+                    event.clientY - (bounds.top + bounds.height / 2)
+                );
+                const intensity = Math.max(0, 1 - distance / radius);
+                letter.style.setProperty('--letter-scale', 1 + intensity * 0.3);
+            });
+        });
+
+        heroTitle.addEventListener('pointerleave', () => {
+            titleLetters.forEach((letter) => letter.style.removeProperty('--letter-scale'));
+        });
+
         const cursorGlow = document.querySelector('.cursor-glow');
         let mouseX = 0;
         let mouseY = 0;
@@ -380,35 +431,29 @@
             cursorGlow.style.left = mouseX + 'px';
             cursorGlow.style.top = mouseY + 'px';
 
-            // Show glow when mouse moves
             if (isMoving === false) {
                 isMoving = true;
                 cursorGlow.classList.remove('hidden');
             }
 
-            // Clear existing timeout
             clearTimeout(moveTimeout);
 
-            // Hide glow after mouse stops moving
             moveTimeout = setTimeout(() => {
                 isMoving = false;
                 cursorGlow.classList.add('hidden');
             }, 1500);
         });
 
-        // Hide glow when mouse leaves window
         document.addEventListener('mouseleave', () => {
             cursorGlow.classList.add('hidden');
             isMoving = false;
             clearTimeout(moveTimeout);
         });
 
-        // Show glow when mouse enters window
         document.addEventListener('mouseenter', () => {
             cursorGlow.classList.remove('hidden');
         });
 
-        // Mobile nav toggle
         (function() {
             const toggle = document.querySelector('.nav-toggle');
             const links = document.querySelector('.nav-links');
@@ -421,7 +466,6 @@
                 links.classList.toggle('open');
             });
 
-            // Close on outside click
             document.addEventListener('click', (e) => {
                 if (!links.classList.contains('open')) return;
                 const target = e.target;
@@ -431,7 +475,6 @@
                 }
             });
 
-            // Close on Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && links.classList.contains('open')) {
                     links.classList.remove('open');

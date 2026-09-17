@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jackr.dev - Projects</title>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         :root {
             --bg-color: #0b0f19;
             --surface: #111827;
@@ -90,13 +94,16 @@
         .eyebrow { margin-bottom: 0.5rem; color: var(--accent-bright); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
         .projects-header h1 {
             padding-bottom: 10px;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 800;
+            width: fit-content;
             background: linear-gradient(135deg, #ffffff, #a5b4fc);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1;
             letter-spacing: -0.04em;
+            margin-bottom: -10px;
         }
         .intro { margin-top: 1rem; color: var(--text-muted); font-size: 1.05rem; }
 
@@ -121,8 +128,9 @@
         .project-content { position: relative; z-index: 1; }
         .project-title { margin-bottom: 0.35rem; font-size: 1.55rem; }
         .project-description { color: #d1d5db; font-size: 0.9rem; line-height: 1.45; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
-        .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 1rem; }
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .project-last-edited, .modal-last-edited { color: var(--text-muted); font-size: 0.75rem; }
+        .project-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.4rem; }
+        .project-tags { display: flex; min-width: 0; flex: 1 1 auto; flex-wrap: nowrap; gap: 0.35rem; overflow: hidden; margin-right: 0.1rem; }
         .project-tag { padding: 0.2rem 0.5rem; color: var(--accent-bright); font-size: 0.72rem; background: rgba(99, 102, 241, 0.16); border: 1px solid rgba(165, 180, 252, 0.25); border-radius: 999px; }
         .github-link { color: var(--text-main); font-size: 0.82rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
         .github-link:hover { color: var(--accent-bright); }
@@ -133,7 +141,7 @@
         .modal-panel { position: relative; display: grid; width: min(960px, 100%); max-height: min(760px, 92vh); grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr); overflow: hidden; background: linear-gradient(145deg, rgba(17, 24, 39, 0.98), rgba(31, 41, 55, 0.96)); border: 1px solid rgba(165, 180, 252, 0.3); border-radius: 24px; box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), 0 0 45px var(--accent-glow); transform: translateY(60px) scale(0.96); transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
         .project-modal.open .modal-panel { transform: translateY(0) scale(1); }
         .modal-media { position: relative; display: grid; min-height: 420px; place-items: center; overflow: hidden; background: rgba(11, 15, 25, 0.7); }
-        .modal-image { width: 100%; height: 100%; object-fit: contain; }
+        .modal-image { width: 100%; height: 100%; max-height: min(70vh, 620px); object-fit: contain; }
         .modal-fallback { color: var(--accent-bright); font-size: clamp(5rem, 14vw, 9rem); font-weight: 800; }
         .modal-arrow, .modal-close { position: absolute; display: grid; place-items: center; color: var(--text-main); background: rgba(11, 15, 25, 0.72); border: 1px solid rgba(255, 255, 255, 0.16); cursor: pointer; }
         .modal-arrow { top: 50%; display: flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; padding: 0 0 0.15em; border-radius: 50%; transform: translateY(-50%); font-size: 1.5rem; line-height: 1; }
@@ -144,9 +152,9 @@
         .modal-close { top: 1rem; right: 1rem; z-index: 1; width: 2.25rem; height: 2.25rem; border-radius: 50%; font-size: 1.4rem; }
         .modal-details { display: flex; flex-direction: column; justify-content: center; padding: clamp(1.5rem, 4vw, 3rem); }
         .modal-details h2 { margin-bottom: 1rem; font-size: clamp(2rem, 4vw, 3rem); }
-        .modal-description { color: #d1d5db; }
-        .modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
-        .modal-github { align-self: flex-start; margin-top: 2rem; color: var(--text-main); font-weight: 700; text-decoration: none; }
+        .modal-description { color: #d1d5db; margin-top: -15px; }
+        .modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; margin-left: -0.2rem; }
+        .modal-github { align-self: flex-start; margin-top: 0.6rem; color: var(--text-main); font-weight: 700; text-decoration: none; margin-left: 0.2rem; }
         .modal-github:hover { color: var(--accent-bright); }
         body.modal-open { overflow: hidden; }
         @keyframes panelReveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -181,7 +189,7 @@
         <header class="projects-header">
             <p class="eyebrow">Selected work</p>
             <h1>Projects</h1>
-            <p class="intro">A collection of things I have built, explored, and brought to life.</p>
+            <p class="intro">A collection of most of my personal projects in Swift, C++, and Python.</p>
         </header>
 
         <section class="search-area" aria-label="Search projects">
@@ -210,8 +218,10 @@
                 <p class="eyebrow">Project details</p>
                 <h2 id="modal-title"></h2>
                 <p class="modal-description"></p>
+                <p class="modal-last-edited"></p>
                 <div class="modal-tags"></div>
                 <a class="modal-github" href="" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
+                <span class="modal-github modal-github-private" hidden>Private Repo</span>
             </div>
         </div>
     </div>
@@ -229,8 +239,10 @@
             const modalFallback = modal.querySelector('.modal-fallback');
             const modalTitle = modal.querySelector('#modal-title');
             const modalDescription = modal.querySelector('.modal-description');
+            const modalLastEdited = modal.querySelector('.modal-last-edited');
             const modalTags = modal.querySelector('.modal-tags');
             const modalGithub = modal.querySelector('.modal-github');
+            const modalGithubPrivate = modal.querySelector('.modal-github-private');
             const modalPrevious = modal.querySelector('.modal-arrow.previous');
             const modalNext = modal.querySelector('.modal-arrow.next');
             let modalImages = [];
@@ -269,6 +281,14 @@
                 return images.filter(Boolean).map(imagePath);
             }
 
+            function githubDetails(project) {
+                const github = project.github;
+                if (Array.isArray(github)) {
+                    return { url: github[0] || '', isPrivate: String(github[1] || '').toLowerCase() === 'private' };
+                }
+                return { url: github || '', isPrivate: false };
+            }
+
             function updateModalImage() {
                 const image = modalImages[modalImageIndex];
                 modalImage.src = image || '';
@@ -293,10 +313,13 @@
                 modalImageIndex = 0;
                 modalTitle.textContent = project.title || 'Untitled project';
                 modalDescription.textContent = project.description || '';
+                modalLastEdited.textContent = project.lastEdited ? `Last edited: ${project.lastEdited}` : '';
                 modalFallback.textContent = (project.title || '?').charAt(0).toUpperCase();
                 modalTags.innerHTML = (project.tags || []).map((tag) => `<span class="project-tag">${tag}</span>`).join('');
-                modalGithub.href = project.github || '#';
-                modalGithub.hidden = !project.github;
+                const github = githubDetails(project);
+                modalGithub.href = github.url || '#';
+                modalGithub.hidden = github.isPrivate || !github.url;
+                modalGithubPrivate.hidden = !github.isPrivate;
                 updateModalImage();
                 modal.classList.add('open');
                 modal.setAttribute('aria-hidden', 'false');
@@ -319,20 +342,36 @@
                 grid.innerHTML = visible.length ? visible.map((project, index) => {
                     const image = projectImages(project)[0];
                     const initial = (project.title || '?').charAt(0).toUpperCase();
+                    const projectTags = [...new Set([...(project.tags || []).filter((tag) => selectedTags.includes(tag)), ...(project.tags || [])])];
+                    const github = githubDetails(project);
                     const projectIndex = projects.indexOf(project);
                     return `<article class="project-card" tabindex="0" role="button" data-project-index="${projectIndex}" style="animation-delay: ${index * 0.06}s">
-                        ${image ? `<img class="project-image" src="${image}" alt="" onerror="this.remove()">` : ''}
-                        <span class="project-fallback" aria-hidden="true">${initial}</span>
+                        ${image ? `<img class="project-image" src="${image}" alt="" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">` : ''}
+                        <span class="project-fallback" aria-hidden="true"${image ? ' hidden' : ''}>${initial}</span>
                         <div class="project-content">
                             <h2 class="project-title">${project.title || 'Untitled project'}</h2>
                             <p class="project-description">${project.description || ''}</p>
+                            ${project.lastEdited ? `<p class="project-last-edited">Last edited: ${project.lastEdited}</p>` : ''}
                             <div class="project-footer">
-                                <div class="project-tags">${(project.tags || []).map((tag) => `<span class="project-tag">${tag}</span>`).join('')}</div>
-                                ${project.github ? `<a class="github-link" href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>` : ''}
+                                <div class="project-tags">${projectTags.map((tag) => `<span class="project-tag">${tag}</span>`).join('')}</div>
+                                ${github.isPrivate ? '<span class="github-link">Private Repo</span>' : github.url ? `<a class="github-link" href="${github.url}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>` : ''}
                             </div>
                         </div>
                     </article>`;
                 }).join('') : '<p class="empty-state">No projects match that search.</p>';
+                fitProjectTags();
+            }
+
+            function fitProjectTags() {
+                grid.querySelectorAll('.project-tags').forEach((tagContainer) => {
+                    const tags = [...tagContainer.children];
+                    tags.forEach((tag, index) => { tag.hidden = index >= 3; });
+                    while (tags.some((tag) => tag.offsetLeft + tag.offsetWidth > tagContainer.clientWidth)) {
+                        const visibleTags = tags.filter((tag) => !tag.hidden);
+                        if (!visibleTags.length) break;
+                        visibleTags[visibleTags.length - 1].hidden = true;
+                    }
+                });
             }
 
             tagList.addEventListener('pointerdown', (event) => {
@@ -375,6 +414,7 @@
                 if (event.key === 'ArrowRight' && modalImages.length > 1) modalNext.click();
             });
             search.addEventListener('input', renderProjects);
+            window.addEventListener('resize', fitProjectTags);
             searchArea.addEventListener('focusin', () => {
                 tagList.classList.add('visible');
                 renderTags();

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fuels",
+    "title": "Fuels",
+    "description": "Tracks driving habits and fuel spending at the pump.",
+    "github": "https://github.com/username/fuels",
+    "image": ["/images/fuels.png", "/images/fuels2.png", "images/fuels3.png"],
+    "tags": ["SwiftUI", "iOS"]
+  },
+  {
+    "id": "fuels",
+    "title": "Fuels",
+    "description": "Tracks driving habits and fuel spending at the pump. Tracks driving habits and fuel spending at the pump. Tracks driving habits and fuel spending at the pump. Tracks driving habits and fuel spending at the pump. Tracks driving habits and fuel spending at the pump. Tracks driving habits and fuel spending at the pump. Tracks driving habits and fuel spending at the pump.",
+    "github": "https://github.com/username/fuels",
+    "image": "/images/fuels.png",
+    "tags": ["Xcode", "MacOS"]
+  },
+  {
+    "id": "fuels",
+    "title": "Fuels",
+    "description": "Tracks driving habits and fuel spending at the pump.",
+    "github": "https://github.com/username/fuels",
+    "image": "/images/fuels.png",
+    "tags": ["WatchOS", "iOS"]
+  }
+]

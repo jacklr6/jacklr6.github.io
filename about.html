@@ -114,11 +114,16 @@
             font-size: 0.95rem;
             font-weight: 500;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover,
         .nav-links a[aria-current="page"] {
             color: var(--text-main);
+        }
+
+        .nav-links a[aria-current="page"] {
+            font-weight: 700;
         }
 
         .nav-links a[aria-current="page"]::after {
@@ -131,6 +136,21 @@
             background: var(--accent-bright);
         }
 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #6366f1, #a5b4fc);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .cta-button,
         .social-link {
             color: white;
@@ -141,14 +161,25 @@
 
         .cta-button {
             margin-left: auto;
-            padding: 0.6rem 1.4rem;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.6rem 1.4rem;
             border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 0.9rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
-        .cta-button:hover,
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
         .social-link:hover {
             transform: translateY(-2px);
         }
@@ -356,7 +387,6 @@
 
             .cta-button {
                 margin-left: 0.5rem;
-                padding: 0.55rem 1rem;
             }
 
             main {
@@ -374,7 +404,7 @@
             }
 
             .profile-meta {
-                margin-top: 0;
+                margin-top: -1.5rem;
             }
         }
 
@@ -399,7 +429,7 @@
         </button>
         <ul class="nav-links">
             <li><a href="about.html" aria-current="page">About</a></li>
-            <li><a href="construction.html">Projects</a></li>
+            <li><a href="projects.html">Projects</a></li>
         </ul>
         <a href="contact.html" class="cta-button">Get in Touch</a>
     </nav>
@@ -422,16 +452,16 @@
                 <p class="bio-copy">I am a Computer Science and Mathematics double major at Gettysburg College with a passion for software engineering computer hardware. My technical background centers on building native applications using Swift and SwiftUI, complemented by strong foundations in Java, algorithms, and modern web development. As an NCAA collegiate student-athlete in cross country and track & field, I apply the same endurance, disciplined focus, and collaborative mindset to my work as I do in competitions. I’ve also worked several summers as a lifeguard, which over the years has improved my leadership, communication, skills. I am constantly seeking opportunities to tackle challenging technical problems and build intuitive, impactful software.</p>
 
                 <div class="action-grid">
-                    <a class="social-link" href="./resume.pdf" target="_blank" rel="noopener noreferrer">
+                    <a class="social-link" href="./pdfs/resume.pdf" target="_blank" rel="noopener noreferrer">
                         <span class="social-icon" aria-hidden="true">↓</span>
                         <span class="social-label">Download Resume</span>
                     </a>
                     <a class="social-link" href="https://www.linkedin.com/in/jacklrogers06/" target="_blank" rel="noopener noreferrer">
-                        <img class="social-icon-image" src="LinkedIn_icon.svg" alt="" aria-hidden="true">
+                        <img class="social-icon-image" src="icons/LinkedIn_icon.svg" alt="" aria-hidden="true">
                         <span class="social-label">LinkedIn</span>
                     </a>
                     <a class="social-link" href="https://github.com/jacklr6" target="_blank" rel="noopener noreferrer">
-                        <img class="social-icon-image" src="GitHub_icon.svg" alt="" aria-hidden="true">
+                        <img class="social-icon-image" src="icons/GitHub_icon.svg" alt="" aria-hidden="true">
                         <span class="social-label">GitHub</span>
                     </a>
                 </div>

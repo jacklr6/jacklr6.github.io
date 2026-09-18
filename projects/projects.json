@@ -1,0 +1,74 @@
+[
+  {
+    "id": "caffeinate",
+    "title": "Caffeinate",
+    "description": "A small MacOS menu bar application that prevents your Mac from going to sleep.",
+    "lastEdited": "2026-09-05",
+    "github": ["https://github.com/jacklr6/Caffeinate"],
+    "image": [],
+    "tags": ["MacOS", "Combine", "SwiftUI"]
+  },
+  {
+    "id": "fuelish",
+    "title": "Fuelish",
+    "description": "Tracks driving habits and fuel spending at the pump. Swift Student Challenge 2026 Submission",
+    "lastEdited": "2026-04-22",
+    "github": ["https://github.com/jacklr6/Fuelish", "private"],
+    "image": [],
+    "tags": ["SwiftUI", "iOS", "LiveActivities", "BackgroundTasks", "WidgetKit", "LocationServices"]
+  },
+  {
+    "id": "myauth",
+    "title": "MyAuth",
+    "description": "A simple and modern TOTP generator for one time secure passcodes.",
+    "lastEdited": "2026-05-05",
+    "github": ["https://github.com/jacklr6/MyAuth", "private"],
+    "image": [],
+    "tags": ["iOS", "SwiftUI", "WatchOS", "SignInWithApple", "CloudKit"]
+  },
+  {
+    "id": "memoryeditor",
+    "title": "MemoryEditor",
+    "description": "A simple terminal-run application that allows you to view and edit memory of running processes.",
+    "lastEdited": "2026-05-25",
+    "github": ["https://github.com/jacklr6/MemoryEditor", "private"],
+    "image": [],
+    "tags": ["C++", "Windows", "CLI"]
+  },
+  {
+    "id": "scorekeeper",
+    "title": "ScoreKeeper",
+    "description": "Gives users the ability to keep score for any game or activity with a simple and easy-to-use interface.",
+    "lastEdited": "2025-10-28",
+    "github": ["https://github.com/jacklr6/ScoreKeeper", "private"],
+    "image": [],
+    "tags": ["iOS", "SwiftUI", "GameCenter", "CloudKit", "SignInWithApple"]
+  },
+  {
+    "id": "tagyourmeat",
+    "title": "TagYourMeat",
+    "description": "Put an NFC tag on your meat to keep an inventory of your meat freezer and track how long it has been in there.",
+    "lastEdited": "2025-07-03",
+    "github": ["https://github.com/jacklr6/TagYourMeat"],
+    "image": [],
+    "tags": ["iOS", "SwiftUI", "NFC", "SignInWithApple"]
+  },
+  {
+    "id": "financeapi",
+    "title": "FinanceAPI",
+    "description": "A simple API for getting stock data from Yahoo Finance.",
+    "lastEdited": "2025-08-25",
+    "github": ["https://github.com/jacklr6/FinanceAPI"],
+    "image": [],
+    "tags": ["Python", "yFinance"]
+  },
+  {
+    "id": "recipeplus",
+    "title": "RecipePlus",
+    "description": "A great way to keep track of your favorite recipes and share them with friends and family.",
+    "lastEdited": "2025-04-01",
+    "github": ["https://github.com/jacklr6/RecipePlus", "private"],
+    "image": [],
+    "tags": ["iOS", "SwiftUI", "HomeKit"]
+  }
+]

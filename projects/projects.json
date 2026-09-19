@@ -63,6 +63,15 @@
     "tags": ["Python", "yFinance"]
   },
   {
+    "id": "stacks",
+    "title": "Stacks",
+    "description": "Utilizes my FinanceAPI to provide a simple and easy-to-use interface for tracking your stock portfolio.",
+    "lastEdited": "2025-08-25",
+    "github": ["https://github.com/jacklr6/Stacks", "private"],
+    "image": [],
+    "tags": ["iOS", "SwiftUI", "SignInWithApple", "Charts"]
+  },
+  {
     "id": "recipeplus",
     "title": "RecipePlus",
     "description": "A great way to keep track of your favorite recipes and share them with friends and family.",

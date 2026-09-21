@@ -51,7 +51,7 @@
     "lastEdited": "2025-07-03",
     "github": ["https://github.com/jacklr6/TagYourMeat"],
     "image": [],
-    "tags": ["iOS", "SwiftUI", "NFC", "SignInWithApple"]
+    "tags": ["iOS", "SwiftUI", "NFC", "SignInWithApple", "Firebase"]
   },
   {
     "id": "financeapi",
@@ -69,7 +69,7 @@
     "lastEdited": "2025-08-25",
     "github": ["https://github.com/jacklr6/Stacks", "private"],
     "image": [],
-    "tags": ["iOS", "SwiftUI", "SignInWithApple", "Charts"]
+    "tags": ["iOS", "SwiftUI", "SignInWithApple", "Charts", "Firebase"]
   },
   {
     "id": "recipeplus",
@@ -78,6 +78,6 @@
     "lastEdited": "2025-04-01",
     "github": ["https://github.com/jacklr6/RecipePlus", "private"],
     "image": [],
-    "tags": ["iOS", "SwiftUI", "HomeKit"]
+    "tags": ["iOS", "SwiftUI", "HomeKit", "Firebase"]
   }
 ]

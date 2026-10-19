@@ -11,7 +11,7 @@
   {
     "id": "fuelish",
     "title": "Fuelish",
-    "description": "Tracks driving habits and fuel spending at the pump. Swift Student Challenge 2026 Submission",
+    "description": "Tracks driving habits and fuel spending at the pump. <span class=\"submission-badge\"><b>SSC26 Submission</b><img class=\"swift-glyph\" src=\"../icons/swift-glyph.png\" alt=\"Swift\"></span>",
     "lastEdited": "2026-04-22",
     "github": ["https://github.com/jacklr6/Fuelish", "private"],
     "image": [],

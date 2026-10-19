@@ -266,6 +266,8 @@
         .project-content { position: relative; z-index: 1; }
         .project-title { margin-bottom: 0.35rem; font-size: 1.55rem; }
         .project-description { color: #d1d5db; font-size: 0.9rem; line-height: 1.45; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+        .submission-badge { display: inline-flex; align-items: center; gap: 0.25rem; color: #ff751a; }
+        .swift-glyph { margin-left: 0.25em; width: 1em; height: 1em; object-fit: contain; vertical-align: middle; }
         .project-last-edited, .modal-last-edited { color: var(--text-muted); font-size: 0.75rem; }
         .project-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.4rem; }
         .project-tags { display: flex; min-width: 0; flex: 1 1 auto; flex-wrap: nowrap; gap: 0.35rem; overflow: hidden; margin-right: 0.1rem; }
@@ -314,13 +316,13 @@
 </head>
 <body>
     <nav>
-        <a href="index.html" class="nav-brand">jackr.dev</a>
+        <a href="../" class="nav-brand">jackr.dev</a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span class="hamburger"></span></button>
         <ul class="nav-links">
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html" aria-current="page">Projects</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../projects/" aria-current="page">Projects</a></li>
         </ul>
-        <a href="contact.html" class="cta-button">Get in Touch</a>
+        <a href="../contact/" class="cta-button">Get in Touch</a>
     </nav>
 
     <main>
@@ -450,7 +452,7 @@
                 modalImages = projectImages(project);
                 modalImageIndex = 0;
                 modalTitle.textContent = project.title || 'Untitled project';
-                modalDescription.textContent = project.description || '';
+                modalDescription.innerHTML = project.description || '';
                 modalLastEdited.textContent = project.lastEdited ? `Last edited: ${project.lastEdited}` : '';
                 modalFallback.textContent = (project.title || '?').charAt(0).toUpperCase();
                 modalTags.innerHTML = (project.tags || []).map((tag) => `<span class="project-tag">${tag}</span>`).join('');
@@ -570,7 +572,7 @@
                 renderTags(selectedTags.length > 0);
             });
 
-            fetch('projects/projects.json')
+            fetch('../projects/projects.json')
                 .then((response) => {
                     if (!response.ok) throw new Error('Could not load project data');
                     return response.json();

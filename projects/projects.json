@@ -11,7 +11,7 @@
   {
     "id": "fuelish",
     "title": "Fuelish",
-    "description": "Tracks driving habits and fuel spending at the pump. <span class=\"submission-badge\"><b>SSC26 Submission</b><img class=\"swift-glyph\" src=\"../icons/swift-glyph.png\" alt=\"Swift\"></span>",
+    "description": "Tracks daily driving habits passively in the background and logs fuel spending at the pump.</br><span class=\"submission-badge\"><b>SSC26 Submission</b><img class=\"swift-glyph\" src=\"../icons/swift-glyph.png\" alt=\"Swift\"></span>",
     "lastEdited": "2026-04-22",
     "github": ["https://github.com/jacklr6/Fuelish", "private"],
     "image": [],
@@ -74,7 +74,7 @@
   {
     "id": "recipeplus",
     "title": "RecipePlus",
-    "description": "A great way to keep track of your favorite recipes and share them with friends and family.",
+    "description": "A great way to keep track of your favorite recipes and share them with friends and family.</br><span class=\"submission-badge\"><b>SSC25 Submission</b><img class=\"swift-glyph\" src=\"../icons/swift-glyph.png\" alt=\"Swift\"></span>",
     "lastEdited": "2025-04-01",
     "github": ["https://github.com/jacklr6/RecipePlus", "private"],
     "image": [],

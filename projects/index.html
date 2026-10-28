@@ -248,6 +248,14 @@
             margin-bottom: 1px;
         }
 
+        .cloudflare-icon-image {
+            display: inline-block;
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-left: 0.25rem;
+            vertical-align: middle;
+        }
+
         .search-box input { width: 100%; color: var(--text-main); font: inherit; background: transparent; border: 0; outline: 0; }
         .search-box input::placeholder { color: var(--text-muted); }
         .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; max-height: 0; margin-top: 0; overflow: visible; visibility: hidden; opacity: 0; transition: opacity 0.25s ease, visibility 0s linear 0.25s; }
@@ -267,7 +275,7 @@
         .project-title { margin-bottom: 0.35rem; font-size: 1.55rem; }
         .project-description { color: #d1d5db; font-size: 0.9rem; line-height: 1.45; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
         .submission-badge { display: inline-flex; align-items: center; gap: 0.25rem; color: #ff751a; }
-        .swift-glyph { margin-left: 0.25em; width: 1em; height: 1em; object-fit: contain; vertical-align: middle; }
+        .swift-glyph { margin-left: 0.15em; width: 1em; height: 1em; object-fit: contain; vertical-align: middle; }
         .project-last-edited, .modal-last-edited { color: var(--text-muted); font-size: 0.75rem; }
         .project-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.4rem; }
         .project-tags { display: flex; min-width: 0; flex: 1 1 auto; flex-wrap: nowrap; gap: 0.35rem; overflow: hidden; margin-right: 0.1rem; }
@@ -290,16 +298,43 @@
         .modal-arrow.previous { left: 1rem; }
         .modal-arrow.next { right: 1rem; }
         .modal-close { top: 1rem; right: 1rem; z-index: 1; width: 2.25rem; height: 2.25rem; border-radius: 50%; font-size: 1.4rem; }
-        .modal-details { display: flex; flex-direction: column; justify-content: center; padding: clamp(1.5rem, 4vw, 3rem); }
-        .modal-details h2 { margin-bottom: 1rem; font-size: clamp(2rem, 4vw, 3rem); }
+        .modal-details { display: flex; flex-direction: column; justify-content: center; padding: clamp(0.9rem, 2.5vw, 2rem); background: #111827; }
+        .modal-details h2 { position: relative; margin-bottom: 1rem; overflow: hidden; font-size: clamp(2rem, 4vw, 3rem); font-stretch: expanded; white-space: nowrap; }
+        .modal-details h2::before, .modal-details h2::after { position: absolute; top: 0; bottom: 0; z-index: 1; width: 1.5rem; content: ''; opacity: 0; pointer-events: none; }
+        .modal-details h2::before { left: 0; background: linear-gradient(to right, #111827, transparent); }
+        .modal-details h2::after { right: 0; background: linear-gradient(to left, #111827, transparent); }
+        .modal-title-track { display: inline-block; }
+        .modal-title-track.is-overflowing { --title-scroll-distance: 0px; --title-scroll-duration: 8s; animation: titleScroll var(--title-scroll-duration) ease-in-out infinite; }
+        .modal-details h2.is-overflowing::before { animation: titleLeftEdgeFade var(--title-scroll-duration) ease-in-out infinite; }
+        .modal-details h2.is-overflowing::after { animation: titleRightEdgeFade var(--title-scroll-duration) ease-in-out infinite; }
         .modal-description { color: #d1d5db; margin-top: -15px; }
         .modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; margin-left: -0.2rem; }
         .modal-github { align-self: flex-start; margin-top: 0.6rem; color: var(--text-main); font-weight: 700; text-decoration: none; margin-left: 0.2rem; }
         .modal-github:hover { color: var(--accent-bright); }
         body.modal-open { overflow: hidden; }
         @keyframes panelReveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes titleScroll {
+            0%, 15% { transform: translateX(0); }
+            50%, 65% { transform: translateX(calc(-1 * var(--title-scroll-distance))); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes titleLeftEdgeFade {
+            0%, 15% { opacity: 0; }
+            30%, 85% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        @keyframes titleRightEdgeFade {
+            0%, 15% { opacity: 1; }
+            35%, 50% { opacity: 1; }
+            60% { opacity: 0; }
+            70%, 85% { opacity: 1; }
+            100% { opacity: 0; }
+        }
 
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .modal-details h2::before, .modal-details h2::after { opacity: 0 !important; }
+        }
         @media (max-width: 768px) {
             nav { gap: 1rem; padding: 0.6rem 1rem; }
             .nav-toggle { display: block; }
@@ -343,7 +378,7 @@
         <section id="project-grid" class="project-grid" aria-live="polite"></section>
     </main>
 
-    <footer class="site-footer">© 2026 Jack Rogers | Protected by Cloudflare</footer>
+    <footer class="site-footer">© 2026 Jack Rogers | Protected by Cloudflare <img class="cloudflare-icon-image" src="../icons/Cloudflare_icon.png" alt="" aria-hidden="true"></footer>
 
     <div id="project-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-panel">
@@ -447,11 +482,32 @@
                 document.body.classList.remove('modal-open');
             }
 
+            function fitModalTitle() {
+                const titleTrack = modalTitle.querySelector('.modal-title-track');
+                if (!titleTrack) return;
+                const overflow = titleTrack.scrollWidth - modalTitle.clientWidth;
+                const isOverflowing = overflow > 1;
+                titleTrack.classList.toggle('is-overflowing', isOverflowing);
+                modalTitle.classList.toggle('is-overflowing', isOverflowing);
+                if (overflow > 1) {
+                    titleTrack.style.setProperty('--title-scroll-distance', `${overflow}px`);
+                    titleTrack.style.setProperty('--title-scroll-duration', `${Math.max(7, overflow / 22 + 5)}s`);
+                    modalTitle.style.setProperty('--title-scroll-duration', titleTrack.style.getPropertyValue('--title-scroll-duration'));
+                } else {
+                    titleTrack.style.removeProperty('--title-scroll-distance');
+                    titleTrack.style.removeProperty('--title-scroll-duration');
+                    modalTitle.style.removeProperty('--title-scroll-duration');
+                }
+            }
+
             function openModal(project) {
                 if (!project) return;
                 modalImages = projectImages(project);
                 modalImageIndex = 0;
-                modalTitle.textContent = project.title || 'Untitled project';
+                const titleTrack = document.createElement('span');
+                titleTrack.className = 'modal-title-track';
+                titleTrack.textContent = project.title || 'Untitled project';
+                modalTitle.replaceChildren(titleTrack);
                 modalDescription.innerHTML = project.description || '';
                 modalLastEdited.textContent = project.lastEdited ? `Last edited: ${project.lastEdited}` : '';
                 modalFallback.textContent = (project.title || '?').charAt(0).toUpperCase();
@@ -464,6 +520,7 @@
                 modal.classList.add('open');
                 modal.setAttribute('aria-hidden', 'false');
                 document.body.classList.add('modal-open');
+                requestAnimationFrame(fitModalTitle);
                 modal.querySelector('.modal-close').focus();
             }
 
@@ -555,6 +612,9 @@
             });
             search.addEventListener('input', renderProjects);
             window.addEventListener('resize', fitProjectTags);
+            window.addEventListener('resize', () => {
+                if (modal.classList.contains('open')) fitModalTitle();
+            });
             searchArea.addEventListener('focusin', () => {
                 tagList.classList.add('visible');
                 renderTags();
@@ -582,7 +642,7 @@
                     renderTags();
                     renderProjects();
                 })
-                .catch(() => { grid.innerHTML = '<p class="empty-state">Project data could not be loaded.</p>'; });
+                .catch(() => { grid.innerHTML = '<p class="empty-state">Project Data Could Not Be Loaded!</p>'; });
         })();
     </script>
 </body>

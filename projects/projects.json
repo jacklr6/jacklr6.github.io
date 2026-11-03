@@ -1,5 +1,14 @@
 [
   {
+    "id": "vantage",
+    "title": "Vantage",
+    "description": "A simple and easy to use gym and lift tracker, syncing your workouts across devices including the Apple Watch.",
+    "lastEdited": "2026-11-02",
+    "github": ["https://github.com/jacklr6/Vantage", "private"],
+    "image": [],
+    "tags": ["MacOS", "Combine", "SwiftUI"]
+  },
+  {
     "id": "caffeinate",
     "title": "Caffeinate",
     "description": "A small MacOS menu bar application that prevents your Mac from going to sleep.",

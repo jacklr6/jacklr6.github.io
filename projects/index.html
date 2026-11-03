@@ -509,7 +509,7 @@
                 titleTrack.textContent = project.title || 'Untitled project';
                 modalTitle.replaceChildren(titleTrack);
                 modalDescription.innerHTML = project.description || '';
-                modalLastEdited.textContent = project.lastEdited ? `Last edited: ${project.lastEdited}` : '';
+                modalLastEdited.textContent = project.lastEdited ? `Last Edited: ${project.lastEdited}` : '';
                 modalFallback.textContent = (project.title || '?').charAt(0).toUpperCase();
                 modalTags.innerHTML = (project.tags || []).map((tag) => `<span class="project-tag">${tag}</span>`).join('');
                 const github = githubDetails(project);
@@ -548,7 +548,7 @@
                         <div class="project-content">
                             <h2 class="project-title">${project.title || 'Untitled project'}</h2>
                             <p class="project-description">${project.description || ''}</p>
-                            ${project.lastEdited ? `<p class="project-last-edited">Last edited: ${project.lastEdited}</p>` : ''}
+                            ${project.lastEdited ? `<p class="project-last-edited">Last Edited: ${project.lastEdited}</p>` : ''}
                             <div class="project-footer">
                                 <div class="project-tags">${projectTags.map((tag) => `<span class="project-tag">${tag}</span>`).join('')}</div>
                                 ${github.isPrivate ? '<span class="github-link">Private Repo</span>' : github.url ? `<a class="github-link" href="${github.url}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>` : ''}
